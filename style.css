@@ -45,7 +45,8 @@ h3 {
   color: #444;
 }
 
-button {
+/* Botões gerais */
+button, .btn {
   background-color: #1db954;
   color: white;
   border: none;
@@ -58,39 +59,68 @@ button {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
+button:hover, .btn:hover {
   background-color: #1ed760;
   transform: translateY(-3px);
 }
 
-button:active {
+button:active, .btn:active {
   transform: translateY(1px);
 }
 
-button:disabled {
+button:disabled, .btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
   box-shadow: none;
 }
 
-.hidden {
-  display: none;
-}
-
-#tipo-servico {
-  margin: 30px auto;
+/* Estilo dos planos */
+.plano {
+  background-color: #fff;
+  border: 2px solid #1db954;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.3s ease;
 }
 
-#tipo-servico .btn {
-  background-color: #ff4757;
-  font-size: 1.2em;
+.plano:hover {
+  transform: scale(1.03);
+  border-color: #17a64a;
 }
 
-#tipo-servico .btn:hover {
-  background-color: #e84118;
+.plano h3 {
+  margin-bottom: 10px;
+  color: #1db954;
+  font-size: 24px;
 }
 
+.plano ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 15px 0;
+  text-align: left;
+}
+
+.plano ul li {
+  margin: 8px 0;
+  padding-left: 24px;
+  position: relative;
+  font-size: 16px;
+}
+
+.plano ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #1db954;
+  font-weight: bold;
+}
+
+/* Input */
 input[type="text"] {
   width: 80%;
   padding: 10px;
@@ -106,6 +136,7 @@ input[type="text"]:focus {
   outline: none;
 }
 
+/* Status */
 #texto-status {
   font-size: 1.3em;
   margin-bottom: 10px;
@@ -136,15 +167,7 @@ input[type="text"]:focus {
   to { width: 100%; }
 }
 
-.aviso-legal {
-  font-size: 0.9em;
-  color: #888;
-  margin-top: 20px;
-  line-height: 1.5;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
+/* Voltar */
 .btn-voltar {
   background-color: #444;
   font-size: 1em;
@@ -154,6 +177,37 @@ input[type="text"]:focus {
   background-color: #333;
 }
 
+/* Aviso legal */
+.aviso-legal {
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 20px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Serviço */
+#tipo-servico {
+  margin: 30px auto;
+  text-align: center;
+}
+
+#tipo-servico .btn {
+  background-color: #ff4757;
+  font-size: 1.2em;
+}
+
+#tipo-servico .btn:hover {
+  background-color: #e84118;
+}
+
+/* Ocultar elementos */
+.hidden {
+  display: none;
+}
+
+/* Responsividade */
 @media screen and (max-width: 768px) {
   section {
     padding: 20px;
@@ -167,7 +221,7 @@ input[type="text"]:focus {
     font-size: 1.6em;
   }
 
-  button {
+  button, .btn {
     font-size: 1em;
     padding: 12px 25px;
   }
@@ -181,6 +235,7 @@ input[type="text"]:focus {
   }
 }
 
+/* Login e registro */
 .auth-box {
   background-color: #ffffff;
   padding: 30px;
