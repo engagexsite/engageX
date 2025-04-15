@@ -11,9 +11,21 @@ const statusEnvio = document.getElementById('status-envio');
 const progresso = document.querySelector('.progresso');
 const inputLink = document.getElementById('input-link');
 const textoStatus = document.getElementById('texto-status');
+const spanPlanoAtivo = document.getElementById('plano-ativo');
+
+// Exibir plano ativo
+document.addEventListener("DOMContentLoaded", () => {
+  const plano = localStorage.getItem("planoSelecionado");
+  if (spanPlanoAtivo && plano) spanPlanoAtivo.textContent = plano;
+});
 
 // Transições entre menus
 btnComecar?.addEventListener('click', () => {
+  const plano = localStorage.getItem("planoSelecionado");
+  if (!plano) {
+    alert("Escolha um plano antes de começar.");
+    return;
+  }
   menuPrincipal.style.display = 'none';
   menuServico.style.display = 'block';
 });
@@ -33,21 +45,66 @@ btnVoltarInicio?.addEventListener('click', () => {
   menuPrincipal.style.display = 'block';
 });
 
+// Seleção de planos
+document.getElementById("plano-gratis")?.addEventListener("click", () => {
+  localStorage.setItem("planoSelecionado", "Plano Grátis");
+  spanPlanoAtivo.textContent = "Plano Grátis";
+  menuPlanos.style.display = 'none';
+  menuServico.style.display = 'block';
+});
+
+document.getElementById("plano-basico")?.addEventListener("click", () => {
+  localStorage.setItem("planoSelecionado", "Plano Básico");
+  spanPlanoAtivo.textContent = "Plano Básico";
+  menuPlanos.style.display = 'none';
+  menuServico.style.display = 'block';
+});
+
+document.getElementById("plano-premium")?.addEventListener("click", () => {
+  localStorage.setItem("planoSelecionado", "Plano Premium");
+  spanPlanoAtivo.textContent = "Plano Premium";
+  menuPlanos.style.display = 'none';
+  menuServico.style.display = 'block';
+});
+
 // Validação de link TikTok
 function validarLinkTikTok(link) {
   const regex = /^https:\/\/www\.tiktok\.com\/(@[\w.-]+|.*\/video\/\d+)/i;
   return regex.test(link);
 }
 
+// Limites por plano
+const limitesPlano = {
+  "Plano Grátis": { curtidas: 50, seguidores: 0, visualizacoes: 1000 },
+  "Plano Básico": { curtidas: 200, seguidores: 100, visualizacoes: 10000 },
+  "Plano Premium": { curtidas: 500, seguidores: 300, visualizacoes: 25000 }
+};
+
 // Envio com validação e barra de progresso
 btnEnviar?.addEventListener('click', () => {
   const link = inputLink.value.trim();
+  const plano = localStorage.getItem("planoSelecionado");
+
+  if (!plano || !limitesPlano[plano]) {
+    alert("Você precisa selecionar um plano válido.");
+    return;
+  }
 
   if (!validarLinkTikTok(link)) {
     alert('Por favor, insira um link válido do TikTok.');
     return;
   }
 
+  // Simulação de envio com limites
+  const limite = limitesPlano[plano];
+  const tipoSelecionado = "curtidas"; // Simulação (pode mudar conforme o botão clicado)
+
+  if (limite[tipoSelecionado] <= 0) {
+    alert(`Seu plano não permite envio de ${tipoSelecionado}.`);
+    return;
+  }
+
+  // Simulação do envio
   btnEnviar.disabled = true;
   let tempoRestante = 120;
   const intervaloBtn = setInterval(() => {
