@@ -1,0 +1,257 @@
+/* Estilo geral do corpo */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+section {
+  text-align: center;
+  width: 90%;
+  max-width: 700px;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+section:hover {
+  transform: scale(1.02);
+}
+
+h1 {
+  font-size: 2.8em;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.4em;
+  color: #444;
+}
+
+button {
+  background-color: #1db954;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  margin: 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #1ed760;
+  transform: translateY(-3px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.hidden {
+  display: none;
+}
+
+#tipo-servico {
+  margin: 30px auto;
+  text-align: center;
+}
+
+#tipo-servico .btn {
+  background-color: #ff4757;
+  font-size: 1.2em;
+}
+
+#tipo-servico .btn:hover {
+  background-color: #e84118;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.1em;
+  margin: 15px 0;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #1db954;
+  outline: none;
+}
+
+#texto-status {
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 500;
+}
+
+.barra-status {
+  width: 100%;
+  max-width: 500px;
+  height: 15px;
+  background-color: #ddd;
+  border-radius: 8px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.progresso {
+  height: 100%;
+  width: 0%;
+  background-color: #1db954;
+  border-radius: 8px;
+  transition: width 5s linear;
+}
+
+@keyframes carregar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.aviso-legal {
+  font-size: 0.9em;
+  color: #888;
+  margin-top: 20px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.btn-voltar {
+  background-color: #444;
+  font-size: 1em;
+}
+
+.btn-voltar:hover {
+  background-color: #333;
+}
+
+@media screen and (max-width: 768px) {
+  section {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 12px 25px;
+  }
+
+  input[type="text"] {
+    width: 90%;
+  }
+
+  .barra-status {
+    width: 100%;
+  }
+}
+
+.auth-box {
+  background-color: #ffffff;
+  padding: 30px;
+  max-width: 400px;
+  margin: 40px auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.auth-box:hover {
+  transform: scale(1.02);
+}
+
+.auth-box input {
+  width: 90%;
+  margin: 10px auto;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.1em;
+  display: block;
+  transition: border-color 0.3s;
+}
+
+.auth-box input:focus {
+  border-color: #1db954;
+  outline: none;
+}
+
+.auth-box button {
+  background-color: #1db954;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-box button:hover {
+  background-color: #1ed760;
+  transform: translateY(-3px);
+}
+
+.auth-box button:active {
+  transform: translateY(1px);
+}
+
+.auth-box p {
+  margin-top: 20px;
+  font-size: 0.95em;
+}
+
+.auth-box a {
+  color: #1db954;
+  text-decoration: none;
+}
+
+.auth-box a:hover {
+  text-decoration: underline;
+}
+
+.auth-box.login {
+  border-top: 5px solid #1db954;
+}
+
+.auth-box.register {
+  border-top: 5px solid #ff4757;
+}

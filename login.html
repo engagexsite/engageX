@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - EngageX</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    #login {
+      background-color: #ffffff;
+      padding: 30px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 80%;
+      padding: 15px;
+      margin: 10px 0;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1.1em;
+      transition: border-color 0.3s;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #1db954;
+      outline: none;
+    }
+
+    button {
+      background-color: #1db954;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      margin-top: 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #1ed760;
+      transform: translateY(-3px);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    p {
+      font-size: 1em;
+      margin-top: 15px;
+    }
+
+    a {
+      color: #1db954;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <section id="login">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input type="email" id="login-email" placeholder="Digite seu e-mail" required />
+      <input type="password" id="login-senha" placeholder="Digite sua senha" required />
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+    <p>Ainda não tem uma conta? <a href="register.html">Registrar-se</a></p>
+    <p id="error-message" class="error-message"></p>
+  </section>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('login-email').value;
+      const senha = document.getElementById('login-senha').value;
+
+      const dados = localStorage.getItem(email);
+
+      if (dados) {
+        const usuario = JSON.parse(dados);
+        if (usuario.senha === senha) {
+          localStorage.setItem('usuarioLogado', email);
+          window.location.href = 'dashboard.html';
+        } else {
+          errorMessage.textContent = 'Senha incorreta. Tente novamente.';
+        }
+      } else {
+        errorMessage.textContent = 'Usuário não encontrado.';
+      }
+    });
+  </script>
+</body>
+</html>
+
