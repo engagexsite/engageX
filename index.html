@@ -1,125 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EngageX - Impulsione seu TikTok</title>
+  <meta name="description" content="EngageX: Aumente visualizações, seguidores e curtidas no TikTok com segurança e rapidez." />
+  <meta name="keywords" content="EngageX, TikTok, curtidas, seguidores, visualizações, engajamento" />
+  <meta name="author" content="EngageX" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-  <!-- Script do Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2421676640752191" 
-          crossorigin="anonymous"></script>
+  <!-- AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2421676640752191" crossorigin="anonymous"></script>
+
+  <!-- Animações e fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- Menu Principal -->
   <section id="menu-principal" class="fade-in">
-    <h1>EngageX</h1>
-    <p>Impulsione sua conta TikTok com segurança e resultados rápidos.</p>
-    <button class="btn" id="btn-comecar">Começar</button>
-    <button class="btn" id="btn-planos">Ver Planos</button>
-    <a href="legal.html" class="btn" style="display:inline-block; margin-top:10px;">Termos e Política</a>
-    <a href="login.html" class="btn" style="display:inline-block; margin-top:10px;">Login</a>
-    <a href="register.html" class="btn" style="display:inline-block; margin-top:10px;">Registrar</a>
+    <h1 class="logo">EngageX</h1>
+    <p class="subtitulo">Impulsione sua conta TikTok com segurança e resultados reais.</p>
+    <div class="botoes-menu">
+      <button class="btn" id="btn-comecar">Começar</button>
+      <button class="btn" id="btn-planos">Ver Planos</button>
+      <a href="legal.html" class="btn link-secundario">Termos e Política</a>
+      <a href="login.html" class="btn link-secundario">Login</a>
+      <a href="register.html" class="btn link-secundario">Registrar</a>
+    </div>
     <p class="aviso-legal">
-      ⚠ Este site não é afiliado ao TikTok. Ao usar, você concorda com nossos termos e declara responsabilidade sobre o uso.
+      ⚠ Este site não é afiliado ao TikTok. Ao continuar, você aceita os <a href="legal.html">termos de uso</a>.
     </p>
   </section>
 
   <!-- Menu de Planos -->
   <section id="menu-planos" class="hidden fade-in">
     <h2>Escolha seu plano</h2>
-
-    <div class="plano">
-      <h3>Plano Grátis</h3>
-      <ul>
-        <li>✅ 50 curtidas</li>
-        <li>✅ 1.000 visualizações</li>
-        <li>✅ Disponível 1x por dia</li>
-        <li>✅ Ativação instantânea</li>
-      </ul>
-      <button class="btn" id="plano-gratis">Selecionar</button>
+    <div class="planos-container">
+      <div class="plano">
+        <h3>Plano Grátis</h3>
+        <p>✔ 50 curtidas<br>✔ 1.000 visualizações</p>
+        <button class="btn" id="plano-gratis">Selecionar</button>
+      </div>
+      <div class="plano">
+        <h3>Plano Básico</h3>
+        <p>✔ 200 curtidas<br>✔ 100 seguidores<br>✔ 10.000 visualizações</p>
+        <button class="btn" id="plano-basico">Selecionar</button>
+      </div>
+      <div class="plano">
+        <h3>Plano Premium</h3>
+        <p>✔ 500 curtidas<br>✔ 300 seguidores<br>✔ 25.000 visualizações</p>
+        <button class="btn" id="plano-premium">Selecionar</button>
+      </div>
     </div>
-
-    <div class="plano">
-      <h3>Plano Básico</h3>
-      <ul>
-        <li>✅ 200 curtidas</li>
-        <li>✅ 100 seguidores</li>
-        <li>✅ 10.000 visualizações</li>
-        <li>✅ Atendimento prioritário</li>
-        <li>✅ Validade de 7 dias</li>
-      </ul>
-      <button class="btn" id="plano-basico">Selecionar</button>
-    </div>
-
-    <div class="plano">
-      <h3>Plano Premium</h3>
-      <ul>
-        <li>✅ 500 curtidas</li>
-        <li>✅ 300 seguidores</li>
-        <li>✅ 25.000 visualizações</li>
-        <li>✅ Suporte 24h</li>
-        <li>✅ Atualizações automáticas</li>
-        <li>✅ Garantia de reposição</li>
-      </ul>
-      <button class="btn" id="plano-premium">Selecionar</button>
-    </div>
-
-    <div class="plano">
-      <h3>Plano Personalizado</h3>
-      <ul>
-        <li>⚙ Defina quantidades de curtidas, seguidores e views</li>
-        <li>💬 Suporte direto via e-mail</li>
-        <li>📅 Agendamento de entrega</li>
-        <li>🔐 Monitoramento por painel</li>
-      </ul>
-      <a href="mailto:contato@engagex.eu?subject=Plano%20Personalizado" class="btn">Solicitar</a>
-    </div>
-
     <button class="btn btn-voltar" id="btn-voltar">← Voltar</button>
   </section>
 
   <!-- Página de Serviço -->
   <section id="menu-servico" class="hidden fade-in">
     <h2>Enviar Interações</h2>
-    <p>Escolha o tipo de interação que deseja enviar para sua conta TikTok:</p>
-    
-    <div id="tipo-servico">
+    <p>Escolha o tipo de interação:</p>
+    <div id="tipo-servico" class="tipo-servico">
       <button class="btn" id="btn-curtidas">Curtidas</button>
       <button class="btn" id="btn-seguidores">Seguidores</button>
       <button class="btn" id="btn-visualizacoes">Visualizações</button>
     </div>
 
-    <p>Insira o link do TikTok (vídeo ou perfil):</p>
-    <input type="text" id="input-link" placeholder="https://www.tiktok.com/@usuario ou vídeo..." />
-    <br /><br />
+    <label for="input-link">Link do TikTok (perfil ou vídeo):</label>
+    <input type="url" id="input-link" placeholder="https://www.tiktok.com/@usuario ou vídeo..." required />
+    
     <button class="btn" id="btn-enviar">Enviar Interações</button>
 
     <div id="status-envio" class="hidden">
-      <p id="texto-status">Enviando interações...</p>
+      <p id="texto-status">⏳ Enviando interações...</p>
       <div class="barra-status">
         <div class="progresso"></div>
       </div>
     </div>
 
-    <br />
     <button class="btn btn-voltar" id="btn-voltar-inicio">← Voltar</button>
   </section>
 
-  <!-- Google Translate Element -->
+  <!-- Google Translate -->
   <div id="google_translate_element" style="position: fixed; top: 10px; right: 10px; z-index: 1000;"></div>
 
-  <!-- Anúncios -->
+  <!-- AdSense Banner -->
   <ins class="adsbygoogle"
-       style="display:block"
+       style="display:block; margin-top:30px;"
        data-ad-client="ca-pub-2421676640752191"
-       data-ad-slot="3651553512"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
+       data-ad-slot="1234567890"
+       data-ad-format="auto"></ins>
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 
+  <!-- Scripts -->
   <script src="script.js"></script>
+  <script type="text/javascript">
+    // Google Translate Init
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'pt', includedLanguages: 'pt,en,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
