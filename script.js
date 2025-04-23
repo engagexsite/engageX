@@ -1,77 +1,19 @@
-// Referências de elementos
-const btnComecar = document.getElementById('btn-comecar');
-const btnPlanos = document.getElementById('btn-planos');
-const btnVoltar = document.getElementById('btn-voltar');
-const btnVoltarInicio = document.getElementById('btn-voltar-inicio');
-const menuPrincipal = document.getElementById('menu-principal');
-const menuPlanos = document.getElementById('menu-planos');
-const menuServico = document.getElementById('menu-servico');
-const btnEnviar = document.getElementById('btn-enviar');
-const statusEnvio = document.getElementById('status-envio');
-const progresso = document.querySelector('.progresso');
-const inputLink = document.getElementById('input-link');
-const textoStatus = document.getElementById('texto-status');
-const spanPlanoAtivo = document.getElementById('plano-ativo');
-
-// Exibir plano ativo
-document.addEventListener("DOMContentLoaded", () => {
-  const plano = localStorage.getItem("planoSelecionado");
-  if (spanPlanoAtivo && plano) spanPlanoAtivo.textContent = plano;
-});
-
-// Transições entre menus
-btnComecar?.addEventListener('click', () => {
-  const plano = localStorage.getItem("planoSelecionado");
-  if (!plano) {
-    alert("Escolha um plano antes de começar.");
-    return;
-  }
-  menuPrincipal.style.display = 'none';
-  menuServico.style.display = 'block';
-});
-
-btnPlanos?.addEventListener('click', () => {
-  menuPrincipal.style.display = 'none';
-  menuPlanos.style.display = 'block';
-});
-
-btnVoltar?.addEventListener('click', () => {
-  menuPlanos.style.display = 'none';
-  menuPrincipal.style.display = 'block';
-});
-
-btnVoltarInicio?.addEventListener('click', () => {
-  menuServico.style.display = 'none';
-  menuPrincipal.style.display = 'block';
-});
-
-// Seleção de planos
-document.getElementById("plano-gratis")?.addEventListener("click", () => {
-  localStorage.setItem("planoSelecionado", "Plano Grátis");
-  spanPlanoAtivo.textContent = "Plano Grátis";
-  menuPlanos.style.display = 'none';
-  menuServico.style.display = 'block';
-});
-
-document.getElementById("plano-basico")?.addEventListener("click", () => {
-  localStorage.setItem("planoSelecionado", "Plano Básico");
-  spanPlanoAtivo.textContent = "Plano Básico";
-  menuPlanos.style.display = 'none';
-  menuServico.style.display = 'block';
-});
-
-document.getElementById("plano-premium")?.addEventListener("click", () => {
-  localStorage.setItem("planoSelecionado", "Plano Premium");
-  spanPlanoAtivo.textContent = "Plano Premium";
-  menuPlanos.style.display = 'none';
-  menuServico.style.display = 'block';
-});
-
-// Validação de link TikTok
-function validarLinkTikTok(link) {
-  const regex = /^https:\/\/www\.tiktok\.com\/(@[\w.-]+|.*\/video\/\d+)/i;
-  return regex.test(link);
-}
+// Elementos principais
+const elementos = {
+  btnComecar: document.getElementById('btn-comecar'),
+  btnPlanos: document.getElementById('btn-planos'),
+  btnVoltar: document.getElementById('btn-voltar'),
+  btnVoltarInicio: document.getElementById('btn-voltar-inicio'),
+  menuPrincipal: document.getElementById('menu-principal'),
+  menuPlanos: document.getElementById('menu-planos'),
+  menuServico: document.getElementById('menu-servico'),
+  btnEnviar: document.getElementById('btn-enviar'),
+  statusEnvio: document.getElementById('status-envio'),
+  progresso: document.querySelector('.progresso'),
+  inputLink: document.getElementById('input-link'),
+  textoStatus: document.getElementById('texto-status'),
+  spanPlanoAtivo: document.getElementById('plano-ativo')
+};
 
 // Limites por plano
 const limitesPlano = {
@@ -80,103 +22,124 @@ const limitesPlano = {
   "Plano Premium": { curtidas: 500, seguidores: 300, visualizacoes: 25000 }
 };
 
-// Envio com validação e barra de progresso
-btnEnviar?.addEventListener('click', () => {
-  const link = inputLink.value.trim();
+// Inicialização
+document.addEventListener("DOMContentLoaded", () => {
   const plano = localStorage.getItem("planoSelecionado");
-
-  if (!plano || !limitesPlano[plano]) {
-    alert("Você precisa selecionar um plano válido.");
-    return;
+  if (elementos.spanPlanoAtivo && plano) {
+    elementos.spanPlanoAtivo.textContent = plano;
   }
 
-  if (!validarLinkTikTok(link)) {
-    alert('Por favor, insira um link válido do TikTok.');
-    return;
+  preencherNomeDashboard();
+});
+
+// Transições de menus
+function trocarMenu(menuEsconder, menuMostrar) {
+  menuEsconder.style.display = 'none';
+  menuMostrar.style.display = 'block';
+}
+
+elementos.btnComecar?.addEventListener('click', () => {
+  const plano = localStorage.getItem("planoSelecionado");
+  if (!plano) return alert("Escolha um plano antes de começar.");
+  trocarMenu(elementos.menuPrincipal, elementos.menuServico);
+});
+
+elementos.btnPlanos?.addEventListener('click', () => trocarMenu(elementos.menuPrincipal, elementos.menuPlanos));
+elementos.btnVoltar?.addEventListener('click', () => trocarMenu(elementos.menuPlanos, elementos.menuPrincipal));
+elementos.btnVoltarInicio?.addEventListener('click', () => trocarMenu(elementos.menuServico, elementos.menuPrincipal));
+
+// Seleção de planos
+["gratis", "basico", "premium"].forEach(tipo => {
+  document.getElementById(`plano-${tipo}`)?.addEventListener("click", () => {
+    const nomePlano = `Plano ${tipo.charAt(0).toUpperCase() + tipo.slice(1)}`;
+    localStorage.setItem("planoSelecionado", nomePlano);
+    elementos.spanPlanoAtivo.textContent = nomePlano;
+    trocarMenu(elementos.menuPlanos, elementos.menuServico);
+  });
+});
+
+// Validação de link TikTok
+function validarLinkTikTok(link) {
+  const regex = /^https:\/\/www\.tiktok\.com\/(@[\w.-]+|.*\/video\/\d+)/i;
+  return regex.test(link);
+}
+
+// Envio de interações
+elementos.btnEnviar?.addEventListener('click', () => {
+  const link = elementos.inputLink.value.trim();
+  const plano = localStorage.getItem("planoSelecionado");
+  const tipoSelecionado = "curtidas"; // Exemplo fixo
+
+  if (!plano || !limitesPlano[plano]) return alert("Você precisa selecionar um plano válido.");
+  if (!validarLinkTikTok(link)) return alert("Por favor, insira um link válido do TikTok.");
+  if (limitesPlano[plano][tipoSelecionado] <= 0) {
+    return alert(`Seu plano não permite envio de ${tipoSelecionado}.`);
   }
 
-  // Simulação de envio com limites
-  const limite = limitesPlano[plano];
-  const tipoSelecionado = "curtidas"; // Simulação (pode mudar conforme o botão clicado)
+  iniciarEnvio();
+});
 
-  if (limite[tipoSelecionado] <= 0) {
-    alert(`Seu plano não permite envio de ${tipoSelecionado}.`);
-    return;
-  }
-
-  // Simulação do envio
-  btnEnviar.disabled = true;
-  let tempoRestante = 120;
-  const intervaloBtn = setInterval(() => {
-    tempoRestante--;
-    btnEnviar.textContent = `Aguarde ${tempoRestante}s`;
-    if (tempoRestante <= 0) {
-      clearInterval(intervaloBtn);
-      btnEnviar.disabled = false;
-      btnEnviar.textContent = 'Enviar Pedido';
+function iniciarEnvio() {
+  elementos.btnEnviar.disabled = true;
+  let tempo = 120;
+  const intervalo = setInterval(() => {
+    elementos.btnEnviar.textContent = `Aguarde ${tempo--}s`;
+    if (tempo < 0) {
+      clearInterval(intervalo);
+      elementos.btnEnviar.disabled = false;
+      elementos.btnEnviar.textContent = 'Enviar Pedido';
     }
   }, 1000);
 
-  statusEnvio.classList.remove('hidden');
-  progresso.style.width = '0%';
-  textoStatus.textContent = 'Enviando interações...';
+  elementos.statusEnvio.classList.remove('hidden');
+  elementos.progresso.style.width = '0%';
+  elementos.textoStatus.textContent = 'Enviando interações...';
 
-  let progressoAtual = 0;
-  const intervaloProgresso = setInterval(() => {
-    if (progressoAtual >= 100) {
-      clearInterval(intervaloProgresso);
-      textoStatus.textContent = 'Interações enviadas com sucesso!';
-    } else {
-      progressoAtual += 10;
-      progresso.style.width = progressoAtual + '%';
+  let progresso = 0;
+  const progressoInterval = setInterval(() => {
+    progresso += 10;
+    elementos.progresso.style.width = `${progresso}%`;
+    if (progresso >= 100) {
+      clearInterval(progressoInterval);
+      elementos.textoStatus.textContent = 'Interações enviadas com sucesso!';
     }
   }, 300);
-});
+}
 
-// Função de registro
+// Registro
 function register() {
-  const nome = document.getElementById('register-nome').value;
-  const email = document.getElementById('register-email').value;
-  const senha = document.getElementById('register-senha').value;
+  const nome = document.getElementById('register-nome')?.value;
+  const email = document.getElementById('register-email')?.value;
+  const senha = document.getElementById('register-senha')?.value;
 
-  if (nome && email && senha) {
-    const usuario = { nome, senha };
-    localStorage.setItem(email, JSON.stringify(usuario));
-    alert('Conta criada com sucesso!');
-    window.location.href = 'login.html';
-  } else {
-    alert('Preencha todos os campos.');
-  }
+  if (!nome || !email || !senha) return alert('Preencha todos os campos.');
+
+  localStorage.setItem(email, JSON.stringify({ nome, senha }));
+  alert('Conta criada com sucesso!');
+  window.location.href = 'login.html';
 }
 
-// Função de login
+// Login
 function login() {
-  const email = document.getElementById('login-email').value;
-  const senha = document.getElementById('login-senha').value;
-  const dadosUsuario = localStorage.getItem(email);
+  const email = document.getElementById('login-email')?.value;
+  const senha = document.getElementById('login-senha')?.value;
+  const dados = localStorage.getItem(email);
 
-  if (dadosUsuario) {
-    const usuario = JSON.parse(dadosUsuario);
-    if (usuario.senha === senha) {
-      localStorage.setItem('usuarioLogado', email);
-      window.location.href = 'dashboard.html';
-    } else {
-      alert('Senha incorreta.');
-    }
-  } else {
-    alert('Usuário não encontrado.');
-  }
+  if (!dados) return alert('Usuário não encontrado.');
+  const usuario = JSON.parse(dados);
+  if (usuario.senha !== senha) return alert('Senha incorreta.');
+
+  localStorage.setItem('usuarioLogado', email);
+  window.location.href = 'dashboard.html';
 }
 
-// Preencher nome no dashboard
-window.addEventListener('DOMContentLoaded', () => {
+// Nome no dashboard
+function preencherNomeDashboard() {
   const painel = document.getElementById('dashboard-nome');
-  const emailLogado = localStorage.getItem('usuarioLogado');
-
-  if (painel && emailLogado) {
-    const dadosUsuario = JSON.parse(localStorage.getItem(emailLogado));
-    painel.textContent = dadosUsuario?.nome || 'Usuário';
+  const email = localStorage.getItem('usuarioLogado');
+  if (painel && email) {
+    const dados = JSON.parse(localStorage.getItem(email));
+    painel.textContent = dados?.nome || 'Usuário';
   }
-});
-
+}
 
